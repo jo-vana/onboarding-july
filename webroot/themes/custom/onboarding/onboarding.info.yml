@@ -1,0 +1,26 @@
+# Theme information
+name: Onboarding
+type: theme
+base theme: classy
+description: Drupal theme files to quickly kickstart a new theme development.
+core: 8.x
+version: 1.x
+
+# Include libraries
+libraries:
+  - onboarding/global-css
+  - onboarding/global-js
+
+# Regions
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  banner: 'Banner'
+  content: 'Content'
+  events_front: 'Events front-page'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_fourth: 'Footer fourth'

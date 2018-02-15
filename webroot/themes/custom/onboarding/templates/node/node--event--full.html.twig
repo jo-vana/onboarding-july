@@ -1,0 +1,53 @@
+{#
+/**
+ * @file
+ * Onboarding's theme implementation to display a full event node.
+ *
+ */
+#}
+{%
+set classes = [
+'node',
+'node--type-' ~ node.bundle|clean_class,
+node.isPromoted() ? 'node--promoted',
+node.isSticky() ? 'node--sticky',
+not node.isPublished() ? 'node--unpublished',
+view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+'clearfix',
+]
+%}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes) }}>
+    <header>
+        {{ title_prefix }}
+        {% if not page %}
+            <h2{{ title_attributes.addClass('node__title') }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+        {% endif %}
+        {{ title_suffix }}
+        {% if display_submitted %}
+            <div class="node__meta">
+                {{ author_picture }}
+                <span{{ author_attributes }}>
+          {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        </span>
+                {{ metadata }}
+            </div>
+        {% endif %}
+    </header>
+    <div{{ content_attributes.addClass('node__content', 'clearfix', 'events') }}>
+        <div class="event-round">{{ content.field_image }}</div>
+        <div class="event-title"><h2{{ title_attributes }}>{{ label }}</h2></div>
+        <div class="event-type">{{ content.field_event_type }}</div>
+        <div class="start"><spam>Start date: </spam>
+            <div class="date">{{ node.field_start_date.value|date("d.M Y")}}</div>
+            <div class ="time"><span>at </span>{{ node.field_start_date.value|date("H:i")}}</div>
+        </div>
+        <div class="end"><spam>End date: </spam>
+            <div class="date">{{  node.field_end_date.value|date("d.M Y")}}</div>
+            <div class ="time"><span>at </span>{{ node.field_end_date.value|date("H:i")}}</div>
+        </div>
+        <div class="event-body">{{ content.body }}</div>
+    </div>
+</article>

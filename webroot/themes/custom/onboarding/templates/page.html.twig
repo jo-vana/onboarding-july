@@ -1,0 +1,94 @@
+{#
+/**
+ * @file
+ * Onboarding's theme implementation to display a single page.
+ *
+ *
+ * Regions:
+ * - page.header: Items for the header region.
+ * - page.banner: The region for banner images.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.footer_first: Items for the first footer column.
+ * - page.footer_second: Items for the second footer column.
+ *
+ */
+#}
+<div id="page-wrapper">
+    <div id="page">
+        <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t }}">
+            <div class="section layout-container clearfix">
+                {{ page.header }}
+            </div>
+        </header>
+
+        {% if page.primary_menu %}
+            <div class="primary_menu">
+                <section class="layout-container section clearfix">
+                    {{ page.primary_menu }}
+                </section>
+            </div>
+        {% endif %}
+
+
+        {#{{ kint(page) }}#}
+        {% if page.banner %}
+            <div class="page-banner">
+                <section class="page-banner__inner section layout-banner-containe clearfix">
+                    {{ page.banner }}
+                </section>
+            </div>
+        {% endif %}
+        <div id="main-wrapper" class="layout-main-wrapper  clearfix">
+            <div id="main" class="layout-container clearfix">
+                {{ page.breadcrumb }}
+                <main id="content" class="column main-content" role="main">
+                    <section class="section">
+                        <a id="main-content" tabindex="-1"></a>
+                        {{ page.content }}
+                    </section>
+                </main>
+
+                {% if page.sidebar_first %}
+                    <div id="sidebar-first" class="column sidebar">
+                        <aside class="section" role="complementary">
+                            {{ page.sidebar_first }}
+                        </aside>
+                    </div>
+                {% endif %}
+                {% if page.sidebar_second %}
+                    <div id="sidebar-second" class="column sidebar">
+                        <aside class="section" role="complementary">
+                            {{ page.sidebar_second }}
+                        </aside>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if page.events_front %}
+            <div id="events-front" class="events-front layout-banner-container clearfix">
+                <section class="section">
+                    <div class="container">
+                    {{ page.events_front }}
+                    </div>
+                </section>
+            </div>
+        {% endif %}
+
+        <footer class="site-footer">
+            <div class="layout-container">
+                {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
+                    <div class="site-footer__top clearfix">
+                        {{ page.footer_first }}
+                        {{ page.footer_second }}
+                        {{ page.footer_third }}
+                        {{ page.footer_fourth }}
+                    </div>
+                {% endif %}
+
+            </div>
+        </footer>
+    </div>
+</div>

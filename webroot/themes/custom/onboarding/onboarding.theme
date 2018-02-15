@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * Onboarding theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+function onboarding_form_alter(&$form, &$form_state, $form_id) {
+    if($form['#id'] = 'exposedformcompanypage_1') {
+        $form['title']['#attributes']['placeholder'] = t('Search by title');
+    }
+};

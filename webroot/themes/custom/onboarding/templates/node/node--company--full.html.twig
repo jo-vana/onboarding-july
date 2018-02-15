@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ *Template for full node companies page.
+ *
+ * @see template_preprocess_node()
+ *
+ * @todo Remove the id attribute (or make it a class), because if that gets
+ *   rendered twice on a page this is invalid CSS for example: two lists
+ *   in different view modes.
+ */
+#}
+{%
+set classes = [
+'node',
+'node--type-' ~ node.bundle|clean_class,
+node.isPromoted() ? 'node--promoted',
+node.isSticky() ? 'node--sticky',
+not node.isPublished() ? 'node--unpublished',
+view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+{{ attach_library('classy/node') }}
+
+    {{ title_prefix }}
+    {% if not page %}
+        <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+    {% endif %}
+    {{ title_suffix }}
+
+    {% if display_submitted %}
+        <footer class="node__meta">
+            {{ author_picture }}
+            <div{{ author_attributes.addClass('node__submitted') }}>
+                {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+                {{ metadata }}
+            </div>
+        </footer>
+    {% endif %}
+
+<div{{ content_attributes.addClass('node__content company_page') }}>
+    {#{{ content }}#}
+    <div class="comp-name"><h2{{ title_attributes }}>{{ label }}</h2><span>{{ content.field_type_of_location }}</span></div>
+    <div class="description">
+        <div class="left-block">{{ content.field_logo }}</div>
+        <div class="right-block">{{ content.body }}</div>
+    </div>
+    <div class="info">
+        <div class="industry">{{ content.field_industry }}</div>
+        <div class="web">{{ content.field_website }}</div>
+        <div class="phone">{{ content.field_phone_number }}</div>
+        <div class="mail">{{ content.field_contact_email }}</div>
+    </div>
+    <div class="loc">
+        <div class="left-block">{{ content.field_company_address }}</div>
+        <div class="right-block">{{  content.field_company_location }}</div>
+    </div>
+</div>
+
